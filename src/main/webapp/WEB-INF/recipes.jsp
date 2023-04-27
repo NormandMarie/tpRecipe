@@ -11,6 +11,7 @@
     <% if(request.getSession().getAttribute("email") != null) { %>
     <a href="${pageContext.request.contextPath}/secured/logout" class="btn btn-danger">Déconnexion</a>
     <a href="${pageContext.request.contextPath}/secured/update?email=${email}" class="btn btn-success">Profil</a>
+    <a href="${pageContext.request.contextPath}/secured/random" class="btn btn-info"> recette  aléatoire</a>
     <a href="${pageContext.request.contextPath}/secured/createRecipe" class="btn btn-success">Ajout recette </a>
     <form action="${pageContext.request.contextPath}/" method="post" >
         <input type="search" name="keyword" placeholder="votre recherche">
