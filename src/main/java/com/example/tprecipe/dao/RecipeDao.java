@@ -1,6 +1,7 @@
 package com.example.tprecipe.dao;
 
 import com.example.tprecipe.dto.RecipeDto;
+import com.example.tprecipe.model.Recipe;
 import com.example.tprecipe.service.DDBconnect;
 
 import java.sql.Connection;
@@ -53,4 +54,30 @@ public class RecipeDao {
             e.printStackTrace();
         }
     }
+    public List<RecipeDto> searchRecipesByKeyword(String keyword) {
+        List<RecipeDto> recipes = new ArrayList<>();
+        final String SELECT_SQL = "SELECT * FROM recipe WHERE name LIKE ? OR details LIKE ? OR type LIKE ?";
+        Connection connection = DDBconnect.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(SELECT_SQL)) {
+            statement.setString(1, "%" + keyword + "%");
+            statement.setString(2, "%" + keyword + "%");
+            statement.setString(3, "%" + keyword + "%");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String type = resultSet.getString("type");
+                int executionTime = resultSet.getInt("execution_time");
+                String details = resultSet.getString("details");
+                Date dateAdded = resultSet.getDate("date_added");
+                String photoUrl = resultSet.getString("photo_url");
+                RecipeDto recipe = new RecipeDto(id, name, type, executionTime, details, dateAdded, photoUrl);
+                recipes.add(recipe);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return recipes;
+    }
+
 }

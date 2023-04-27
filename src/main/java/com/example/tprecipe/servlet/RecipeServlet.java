@@ -32,19 +32,13 @@ public class RecipeServlet extends HttpServlet {
         RequestDispatcher viewpost = req.getRequestDispatcher("/WEB-INF/recipes.jsp");
         viewpost.forward(req, resp);
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd");
-        String dateStr = formatter.format(date);
-
-        try {
-            recipeService.addRecipe("Ma recette", "Plat principal", 60, "Lorem ipsum dolor sit amet", formatter.parse(dateStr), "https://example.com/my_recipe.jpg");
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        resp.sendRedirect(req.getContextPath());
+        String keyword = req.getParameter("keyword");
+        List<RecipeDto> recipes =  recipeService.searchRecipesByKeyword(keyword);
+        req.setAttribute("recipes", recipes);
+        RequestDispatcher viewSearch = req.getRequestDispatcher("/WEB-INF/searchRecipe.jsp");
+        viewSearch.forward(req, resp);
     }
 }
 

@@ -17,4 +17,8 @@ public class RecipeService {
         recipeDao.addRecipe(name, type, executionTime, details, dateAdded, photoUrl);
     }
 
+    public List<RecipeDto> searchRecipesByKeyword(String keyword) {
+        return recipeDao.searchRecipesByKeyword(keyword);
+    }
+
 }
