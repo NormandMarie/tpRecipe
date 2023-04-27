@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class RecipeDao {
@@ -35,5 +36,21 @@ public class RecipeDao {
 
         return recipeDtos;
 
+    }
+    public void addRecipe(String name, String type, int executionTime, String details, Date dateAdded, String photoUrl) {
+        final String INSERT_SQL = "INSERT INTO recipe (name, type, execution_time, details, date_added, photo_url) VALUES (?, ?, ?, ?, ?, ?)";
+
+        Connection connection = DDBconnect.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(INSERT_SQL)) {
+            statement.setString(1, name);
+            statement.setString(2, type);
+            statement.setInt(3, executionTime);
+            statement.setString(4, details);
+            statement.setDate(5, new java.sql.Date(dateAdded.getTime()));
+            statement.setString(6, photoUrl);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
