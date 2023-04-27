@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <!DOCTYPE html>
 <html>
@@ -9,17 +10,24 @@
 <body>
 <div class="container ">
     <% if(request.getSession().getAttribute("email") != null) { %>
-    <a href="${pageContext.request.contextPath}/secured/logout" class="btn btn-danger">Déconnexion</a>
-    <a href="${pageContext.request.contextPath}/secured/update?email=${email}" class="btn btn-success">Profil</a>
-    <a href="${pageContext.request.contextPath}/secured/random" class="btn btn-info"> recette  aléatoire</a>
-    <a href="${pageContext.request.contextPath}/secured/createRecipe" class="btn btn-success">Ajout recette </a>
-    <form action="${pageContext.request.contextPath}/" method="post" >
-        <input type="search" name="keyword" placeholder="votre recherche">
-        <button type="submit" class="btn btn-danger">recherche</button>
-    </form>
+    <div class="d-flex justify-content-between  m-3">
+        <img  src="https://www.sauvageboris.fr/training/javaee/recipeEE/resources/logo/60.png"  alt="une marmitte" >
+        <div class="d-flex align-content-center flex-wrap">
 
+            <a href="${pageContext.request.contextPath}/webapi/recipes" class="btn btn-dark m-2">Api</a>
+            <a href="${pageContext.request.contextPath}/webapi/recipes/random" class="btn btn-dark m-2">Api random</a>
+            <a href="${pageContext.request.contextPath}/secured/logout" class="btn btn-danger m-2">Déconnexion</a>
+            <a href="${pageContext.request.contextPath}/secured/update?email=${email}" class="btn btn-success m-2">Profil</a>
+            <a href="${pageContext.request.contextPath}/secured/random" class="btn btn-info m-2"> recette  aléatoire</a>
+            <a href="${pageContext.request.contextPath}/secured/createRecipe" class="btn btn-success m-2">Ajout recette </a>
+            <form action="${pageContext.request.contextPath}/" method="post" >
+                <input type="search" name="keyword" placeholder="votre recherche">
+                <button type="submit" class="btn btn-danger">recherche</button>
+            </form>
+        </div>
+    </div>
     <% } else { %>
-        <a href="${pageContext.request.contextPath}/login" class="btn btn-success">connexion</a>
+        <a href="${pageContext.request.contextPath}/login" class="btn btn-success m-2">connexion</a>
         <% } %>
     <h1 style="text-align: center"> My recipe book  </h1>
   <c:if test="${empty recipeDtos}">

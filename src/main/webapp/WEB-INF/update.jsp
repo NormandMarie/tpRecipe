@@ -32,5 +32,6 @@
        <button type="submit" class="btn btn-primary" class="d-flex">changement</button>
    </form>
 </div>
+<a href="${pageContext.request.contextPath}" class="btn btn-dark m-2">recipes</a>
 </body>
 </html>
