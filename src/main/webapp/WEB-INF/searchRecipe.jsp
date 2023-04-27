@@ -13,7 +13,7 @@
     <title>Search Recipe</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}">recipes</a>
+<a href="${pageContext.request.contextPath}" class="btn btn-dark m-2">recipes</a>
 <c:if test="${empty recipes}">
     <p>Aucune recette trouvé.</p>
 </c:if>

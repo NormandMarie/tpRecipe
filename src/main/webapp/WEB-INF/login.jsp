@@ -13,21 +13,24 @@
     <title>login</title>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/login" class="container" method="post">
-    <div class="form-group">
-        <label for="exampleInputEmail1">Email </label>
-        <input type="email"  name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrée email">
-        <small id="emailHelp" class="form-text text-muted">Nous ne partagerons jamais votre e-mail avec quelqu'un d'autre.</small>
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">mot de passe</label>
-        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="mot de passe">
-    </div>
-    <button type="submit" class="btn btn-primary">Connexion</button>
-</form>
-<a href="register">inscription </a>
-<c:if test="${isError == true}">
-    <p>veuillez réessayer.</p>
-</c:if>
+<div class="container">
+    <form action="${pageContext.request.contextPath}/login" class="container" method="post">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email </label>
+            <input type="email"  name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrée email">
+            <small id="emailHelp" class="form-text text-muted">Nous ne partagerons jamais votre e-mail avec quelqu'un d'autre.</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">mot de passe</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="mot de passe">
+        </div>
+        <button type="submit" class="btn btn-primary m-2">Connexion</button>
+    </form>
+    <a href="register" class="btn btn-info">inscription </a>
+    <c:if test="${isError == true}">
+        <p>veuillez réessayer.</p>
+    </c:if>
+</div>
+
 </body>
 </html>
