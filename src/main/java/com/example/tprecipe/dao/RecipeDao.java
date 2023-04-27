@@ -79,5 +79,30 @@ public class RecipeDao {
         }
         return recipes;
     }
+    public List<RecipeDto> getRecipesAddedSince(Date dateLimit) {
+        List<RecipeDto> recipes = new ArrayList<>();
+        Connection connection = DDBconnect.getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM recipe WHERE date_added >= ?"
+        )) {
+            statement.setDate(1, new java.sql.Date(dateLimit.getTime()));
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                RecipeDto recipe = new RecipeDto(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("type"),
+                        resultSet.getInt("execution_time"),
+                        resultSet.getString("details"),
+                        resultSet.getDate("date_added"),
+                        resultSet.getString("photo_url")
+                );
+                recipes.add(recipe);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return recipes;
+    }
 
 }
