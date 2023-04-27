@@ -7,7 +7,14 @@
   <title>My recipe book</title>
 </head>
 <body>
-<div class="container "><h1 style="text-align: center"> My recipe book  </h1>
+<div class="container ">
+    <% if(request.getSession().getAttribute("email") != null) { %>
+    <a href="${pageContext.request.contextPath}/secured/logout" class="btn btn-danger">Déconnexion</a>
+    <a href="${pageContext.request.contextPath}/secured/update?email=${email}" class="btn btn-success">Profil</a>
+    <% } else { %>
+        <a href="${pageContext.request.contextPath}/login" class="btn btn-success">connexion</a>
+        <% } %>
+    <h1 style="text-align: center"> My recipe book  </h1>
   <c:if test="${empty recipeDtos}">
     <p>Aucun post trouvé.</p>
   </c:if>
@@ -35,6 +42,6 @@ grid-row-gap: 20px; ">
 <br/>
 </div>
 </div>
-<a href="login">connexion</a>
+
 </body>
 </html>

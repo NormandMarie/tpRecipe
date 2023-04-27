@@ -13,6 +13,12 @@ public class UserDto {
         this.password = "********";
     }
 
+    public UserDto(String nom, String prenom, String email, String photo) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.photo = photo;
+    }
 
     public int getId() {
         return id;

@@ -33,7 +33,7 @@ public class loginServlet extends HttpServlet {
             if (user != null) {
                 // Si les informations de connexion sont correctes, on stocke les données de l'utilisateur dans la session et on redirige vers la page d'accueil
                 HttpSession session = req.getSession();
-                session.setAttribute("username", user.getEmail());
+                session.setAttribute("email", user.getEmail());
                 resp.sendRedirect(req.getContextPath());
             } else {
                 // Si les informations de connexion sont incorrectes, on renvoie l'utilisateur vers la page de connexion avec un message d'erreur
